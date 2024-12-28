@@ -73,7 +73,7 @@ file(GLOB_RECURSE libwifi_src
     "src/libwifi/*.c"
 )
 
-add_library(wifi SHARED ${libwifi_src})
+add_library(wifi ${libwifi_src})
 set_target_properties(wifi PROPERTIES LINKER_LANGUAGE C)
 set_target_properties(wifi PROPERTIES VERSION ${LIBWIFI_VERSION})
 set_target_properties(wifi PROPERTIES SOVERSION 0)
@@ -91,4 +91,4 @@ install(DIRECTORY src/libwifi/parse/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include
 install(DIRECTORY src/libwifi/gen/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/libwifi/gen FILES_MATCHING PATTERN "*.h")
 install(TARGETS wifi LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
-add_custom_target(uninstall COMMAND rm -rf ${CMAKE_INSTALL_PREFIX}/include/libwifi; rm -rf ${CMAKE_INSTALL_PREFIX}/include/libwifi.h; rm -rf ${CMAKE_INSTALL_PREFIX}/lib/libwifi*)
+add_custom_target(uninstall-libwifi COMMAND rm -rf ${CMAKE_INSTALL_PREFIX}/include/libwifi; rm -rf ${CMAKE_INSTALL_PREFIX}/include/libwifi.h; rm -rf ${CMAKE_INSTALL_PREFIX}/lib/libwifi*)

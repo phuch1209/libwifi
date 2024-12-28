@@ -152,6 +152,7 @@ int libwifi_bss_tag_parser(struct libwifi_bss *bss, struct libwifi_tag_iterator 
                 break;
             case TAG_DS_PARAMETER:
             case TAG_HT_OPERATION:
+                bss->check = 1; 
                 memcpy(&bss->channel, it->tag_data, 1);
                 break;
             case TAG_RSN:
@@ -172,6 +173,10 @@ int libwifi_bss_tag_parser(struct libwifi_bss *bss, struct libwifi_tag_iterator 
                 extension_header = (struct libwifi_tag_extension_header *) it->tag_data;
 
                 switch (extension_header->tag_num) {
+                    case 0x24:
+                        if(!bss->check){
+                            memcpy(&bss->channel, it->tag_data + 7, 1);
+                        }
                     default:
                         /* Not Implemented */
                         break;
